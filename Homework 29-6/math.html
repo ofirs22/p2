@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <input id = "userInput">
+    <button onclick = "mathManipulation()">Click to manipulate the number</button>
+    <div id = "display"></div>
+    <script>
+        function mathManipulation(){
+            let input = userInput.value;
+            let afterPi = input * Math.PI;
+
+            display.innerHTML = `<h2 style = "text-align : center; color : blue;">This is your number after multiply by PI: 
+                ${afterPi}</h2><br><br><br>
+                <h2 style = "text-align : center; color : blue;">This is the new number after removing the digits after the decimal point: ${Math.trunc(afterPi)}`;
+        }
+        
+
+    </script> 
+</body>
+</html>
