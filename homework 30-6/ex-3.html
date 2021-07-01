@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<body>
+    <div style = "padding: 300px; border : 1px solid black">
+        <button id = "moveIt" style = "top:0; left:0; position: absolute;">Move me!!</button>
+    </div>
+        <script>
+            let flag;
+            let cordinate = moveIt.getBoundingClientRect();
+            let moveTo = cordinate.left;
+            let parentDim = moveIt.parentNode.getBoundingClientRect();
+
+            moveIt.style.left = parentDim.left;
+            setInterval(moveButton, 10);
+            
+            function moveButton(){     
+            moveIt.style.position = "absolute";
+            if(moveTo == 0){
+                flag = true;
+            }
+            if(moveTo == parentDim.right - moveIt.offsetWidth){
+                flag = false;
+            }
+            flag ? moveTo += 1 : moveTo -= 1;
+            moveIt.style.left = moveTo+'px';
+            }
+        </script>
+</body>
+</html>

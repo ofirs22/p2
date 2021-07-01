@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm" id = "active" style = "text-align: center; ">
+            <input id = "display" style = "text-align: center; font-size: 80px;">
+          </div>
+          <div class="col-sm">
+          </div>
+        </div>
+      </div>
+      <script>
+            let secs = 0, mins = 0, hours = 0;
+            setInterval(updateWatch,1000);
+
+            function updateWatch(){
+                secs +=1;
+                if(secs == 60){
+                    mins +=1;
+                    secs = 0;
+                }
+                if(mins == 60){
+                    hours += 1;
+                    mins = 0;
+                }
+                if(hours == 24){
+                    hours = 0;
+                }
+                display.value = `${hours}:${mins}:${secs}`;
+                
+            }            
+      </script>
+</body>
+</html>
