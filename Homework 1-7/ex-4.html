@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'main' style = "text-align: center;">
+        <button onclick="drawNumbers()">Click to draw</button><br><br>
+
+    </div>
+    <script>
+        function drawNumbers(){
+            //create 7 buttons and give them a random value
+            let lottery = [];
+            console.log('test');
+            for (let index = 0; index < 7; index++) {
+                tempDraw = Math.floor(Math.random() * 40);
+                console.log(tempDraw);
+                if(lottery.includes(tempDraw)){
+                    index--;
+                    console.log('if');
+                }else{
+                    console.log('else ' + tempDraw)
+                    lottery.push(tempDraw);
+                    if(index == 6){main.innerHTML += '<br><br>'}
+                    main.innerHTML += `<button>${tempDraw}</button>`;
+                }
+            }
+            console.log(lottery);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "mainDiv" onclick="showSecs()" >
+        <script>
+            
+            for (let index = 0; index < 100; index++) {
+                mainDiv.innerHTML += `<button>Press Me</button>`
+                
+            }
+
+            function getSecs(){
+                let today = new Date();
+                return today.getSeconds();
+            }
+
+            function showSecs(){
+                if(event.target.nodeName != 'DIV'){
+                    event.target.innerText =  getSecs();
+                    event.target.style.backgroundColor = `rgb(${(getSecs() * 13) % 255},
+                    ${(getSecs() * 24) % 255} , ${(getSecs() * 13) % 255})`;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

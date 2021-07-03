@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div style = "text-align: center;" id = "display" onclick="playTurn()">
+        <div style = "color: blue; ;"><h1 id = 'blueTurn'>Blue turn</h1></div>
+        <div id = "msgDiv"><h2 id = "massege"></h2></div>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn1" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn2" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn3" class = "btnGame"></button><br>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn4" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn5" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn6" class = "btnGame"></button><br>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn7" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn8" class = "btnGame"></button>
+        <button style = " margin: 3px; height: 60px; width: 60px;" id = "btn9" class = "btnGame"></button>
+        <div style = "color: red;"><h1 id = 'redTurn'>Red turn</h1></div>
+    </div>
+    <div style = "text-align: center;">
+        <button onclick="clearBoard()">Start new game</button>
+    </div>
+    <script>
+        //initialization
+        let turn = 1;
+        let markedButtons = 0;
+        redTurn.innerText = '';
+        let win = 0;
+        //check win
+        //color the pressed button accordig to the player's turn
+        function markButton(){
+            //if the button is already pressed
+            if(event.target.style.backgroundColor){
+                massege.innerText = 'This cell is unavailable'; 
+                return false;
+            }
+            //if blue turn
+            if(turn > 0){
+                event.target.style.backgroundColor = 'blue';
+                blueTurn.innerText = "";
+                redTurn.innerText = "Red turn";
+            //if red turn
+            }else{
+                event.target.style.backgroundColor = 'red';
+                blueTurn.innerText = "Blue turn";
+                redTurn.innerText = "";
+            }
+            return true;
+
+        }
+        //attached to clear board button
+        function clearBoard(){
+            //address all buttons in btnGame class
+            let buttons = display.querySelectorAll(".btnGame");
+            for (let i = 0; i < buttons.length; i++) {
+                //remove the background color attribute to all buttons in this class
+                buttons[i].style.backgroundColor = "";   
+            }
+            //initialize the variables
+            turn = 1;
+            markedButtons = 1;
+            win = 0;
+        }
+        //check if all buttons are marked already
+        function checkFull(){
+            let buttons = display.querySelectorAll(".btnGame");
+            for (let i = 0; i < buttons.length; i++) {
+                if(buttons[i].style.backgroundColor == ""){
+                    return true;
+                }
+            }
+            return false;  
+        }
+        function checkWin(){
+            //if blue turn
+            if(turn > 0){
+                //check all winning possibilities for the blue player
+                if ((btn1.style.backgroundColor == 'blue' && btn2.style.backgroundColor == 'blue' && btn3.style.backgroundColor == 'blue') ||
+                (btn4.style.backgroundColor == 'blue' && btn5.style.backgroundColor == 'blue' && btn6.style.backgroundColor == 'blue') ||
+                (btn7.style.backgroundColor == 'blue' && btn8.style.backgroundColor == 'blue' && btn9.style.backgroundColor == 'blue') ||
+                (btn1.style.backgroundColor == 'blue' && btn5.style.backgroundColor == 'blue' && btn9.style.backgroundColor == 'blue') ||
+                (btn3.style.backgroundColor == 'blue' && btn5.style.backgroundColor == 'blue' && btn7.style.backgroundColor == 'blue') ||
+                (btn1.style.backgroundColor == 'blue' && btn4.style.backgroundColor == 'blue' && btn7.style.backgroundColor == 'blue') ||
+                (btn2.style.backgroundColor == 'blue' && btn5.style.backgroundColor == 'blue' && btn8.style.backgroundColor == 'blue') ||
+                (btn3.style.backgroundColor == 'blue' && btn6.style.backgroundColor == 'blue' && btn9.style.backgroundColor == 'blue')){
+                    return true;
+                }
+                //if red turn
+            }else{
+                //check all winning possibilities for the red player
+                if ((btn1.style.backgroundColor == 'red' && btn2.style.backgroundColor == 'red' && btn3.style.backgroundColor == 'red') ||
+                (btn4.style.backgroundColor == 'red' && btn5.style.backgroundColor == 'red' && btn6.style.backgroundColor == 'red') ||
+                (btn7.style.backgroundColor == 'red' && btn8.style.backgroundColor == 'red' && btn9.style.backgroundColor == 'red') ||
+                (btn1.style.backgroundColor == 'red' && btn5.style.backgroundColor == 'red' && btn9.style.backgroundColor == 'red') ||
+                (btn3.style.backgroundColor == 'red' && btn5.style.backgroundColor == 'red' && btn7.style.backgroundColor == 'red') ||
+                (btn1.style.backgroundColor == 'red' && btn4.style.backgroundColor == 'red' && btn7.style.backgroundColor == 'red') ||
+                (btn2.style.backgroundColor == 'red' && btn5.style.backgroundColor == 'red' && btn8.style.backgroundColor == 'red') ||
+                (btn3.style.backgroundColor == 'red' && btn6.style.backgroundColor == 'red' && btn9.style.backgroundColor == 'red')){
+                    return true;
+                }
+
+            }
+            //if no one won yet
+            return false;
+        }
+
+        function playTurn(){
+            //the genesis function for play buttons, the onclick is in the parent div, but we exclude the div for tha event
+            if((event.target.nodeName == 'BUTTON') && (!win)){
+                if(!markButton()){
+                    massege.inner = "This button is unvailable";
+                }else{
+                    if(!checkWin()){
+                        markedButtons += 1;
+                        if(markedButtons == 9 ){
+
+                            massege.innerText = `Board is full, press the 'start new game button' to start a new game`;
+                        }
+                        turn *= (-1);
+                        //increase the amount of buttons in play
+                        
+
+                    }else{
+                        turn > 0 ? massege.innerText = `The Blue player won` : massege.innerText =`The red player won`; 
+                        blueTurn.innerText = "";
+                        redTurn.innerText = "";
+                        markedButtons = 0;
+                        win = 1;   
+                    }  
+                }
+            }
+        }
+
+
+    </script>
+    
+</body>
+</html>

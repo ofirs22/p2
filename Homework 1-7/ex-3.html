@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<body>
+    <div style = "padding: 300px; border : 5px solid black;">
+        <button id = "horizontal" style = "top:1px; left:1px; position: absolute; width : 100px; height : 50px;">Horizontal</button>
+        <button id = "diagonal" style = "top:1px; left:1px; position: absolute; width : 100px; height : 50px;">Diagonal</button>
+        <button id = "vertical" style = "top:1px; left:1px; position: absolute; width : 100px; height : 50px;">Vertical</button>
+    </div>
+        <script>
+            let screenWidth = screen.width;
+            let screenHeight = screen.height;
+            let horizontalLeft = 1;
+            let verticalTop = 1;
+            let horizontalDelta = 10;
+            let verticalDelta = 10;
+            let diagonalLeft = 1;
+            let diagonalTop = 1;
+            let diagonalTopDelta = 2;
+            let diagonalLeftDelta = 1;
+
+            //console.log(screenHeight + " " + screenWidth);
+            setInterval(moveButtons, 10);
+            function checkBorders(borderToCheck){
+                if(borderToCheck == 'vertical'){
+                    if((verticalTop < 1) || (verticalTop > (screen.height - 50))){
+                        return true;
+                    }
+                }else if(borderToCheck == 'horizontal'){
+                    if((horizontalLeft < 1) || (horizontalLeft > (screen.width - 100))){ 
+                        return true;
+                    }
+                }else if(borderToCheck == 'diagonalTop'){
+                    if((diagonalTop < 1) || (diagonalTop > (screen.height - 50))){
+                        return true;
+                    }
+                }else if(borderToCheck == 'diagonalLeft'){
+                    if((diagonalLeft < 1) || (diagonalLeft > (screen.width - 100))){
+                        return true;
+                    }
+                }       
+            } 
+            function moveHorizontal(){
+
+                // if((horizontalLeft < 1) || (horizontalLeft > (screen.width - 100))){ 
+                //     horizontalDelta = horizontalDelta * (-1);
+                // }
+                if(checkBorders('horizontal')){ 
+                    horizontalDelta = horizontalDelta * (-1);
+                } 
+                horizontalLeft += horizontalDelta;
+                horizontal.style.left = horizontalLeft +'px';
+                //sconsole.log('horizontal ' + horizontalLeft)
+            }
+
+            function moveVertical(){
+                // if((verticalTop < 1) || (verticalTop > (screen.height - 50))){ 
+                //     verticalDelta = verticalDelta * (-1);
+                // }
+                if(checkBorders('vertical')){ 
+                    verticalDelta = verticalDelta * (-1);
+                }
+                verticalTop += verticalDelta;
+                vertical.style.top = verticalTop +'px';
+                //console.log('vertical ' + screenHeight)
+            }
+
+            function moveDiag(){
+                //console.log(diagonal.style.top + " " + diagonal.style.left);
+                // if((diagonalTop < 1) || (diagonalTop > (screenHeight - 50))){ 
+                //     diagonalToplDelta = diagonalTopDelta * (-1);
+                    
+                // }
+                if(checkBorders('diagonalTop')){ 
+                    diagonalTopDelta = diagonalTopDelta * (-1);
+                }
+                diagonalTop += diagonalTopDelta;
+                diagonal.style.top = diagonalTop +'px';
+                if(checkBorders('diagonalLeft')){ 
+                    diagonalLeftDelta = diagonalLeftDelta * (-1);
+                }
+                diagonalLeft += diagonalLeftDelta;
+                diagonal.style.left = diagonalLeft +'px';
+                //console.log('diagonal ' + (screenHeight - 50))
+                // if((diagonalLeft < 1) || (diagonalLeft > (screenWidth - 100))){ 
+                //     diagonalLeftDelta = diagonalLeftDelta * (-1);
+                // }
+                
+                //console.log('diagonalLeft: ' + diagonalLeft + ' screenWidth')
+                
+            }
+            function moveButtons() {
+                moveDiag();
+                moveVertical();
+                moveHorizontal();
+
+            }
+            moveButtons();
+
+            
+        </script>
+</body>
+</html>

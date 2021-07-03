@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 <body>
-    <div style = "padding: 300px; border : 1px solid black">
+    <div style = "padding: 300px; border : 5px solid black;">
         <button id = "moveIt" style = "top:0; left:0; position: absolute;">Move me!!</button>
     </div>
         <script>
@@ -14,9 +14,9 @@
             let moveHor = cordinate.left;
             //vertical pixel
             let moveVer = cordinate.top;
+            
             //acceess to the parent dimmenssion , so i know when to change direction
             let parentDim = moveIt.parentNode.getBoundingClientRect();
-
             //start at the top left of the parent container
             moveIt.style.left = parentDim.left;
             //frequency
@@ -25,6 +25,7 @@
             //This function move the button in 1 direction until hits the edge of the container and make a 90 deg turn clockwise
             //also change the BG color of the parent div
             function moveButton(){ 
+                
                 //Parent container - keep reference to the parent container, keep the function as generic as possible
                 par = moveIt.parentNode;    
                 moveIt.style.position = "absolute";
@@ -32,12 +33,8 @@
                 //when top is 0 and left is 0 change the flag to 0 - when i want to go right
                 //Those conditions happen once per turn
                 if((moveHor == 0) && (moveVer == 0)){
-                    
                     par.style.backgroundColor = `rgb(${Math.random()*254},${Math.random()*254},${Math.random()*254})`;
                     flag = 0;
-                    par.InnerHTML =  `<iframe width="876" height="493" src="https://www.youtube.com/embed/PkZNo7MFNFg" 
-                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
-                    clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ; style = "text align: center"></iframe>`
                 }
                 //when top is 0 and right is the right edge minus the size of the button change the flag to 1 - i want to go down
                 if((moveHor == parentDim.right - moveIt.offsetWidth) && (moveVer == 0)){
